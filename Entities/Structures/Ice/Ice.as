@@ -1,6 +1,6 @@
-#include "Hitters.as"
-#include "MakeMat.as"
-#include "FireCommon.as"
+#include "Hitters.as";
+#include "FireCommon.as";
+
 void onInit(CBlob@ this)
 {
     this.getSprite().getConsts().accurateLighting = true;
@@ -9,7 +9,7 @@ void onInit(CBlob@ this)
     this.server_setTeamNum(-1); //allow anyone to break them
 	this.Tag("place norotate");
 	this.getSprite().setRenderStyle(RenderStyle::light);
-	this.set_s16(burn_duration , 300);
+	this.set_s16(burn_duration, 300);
 	//transfer fire to underlying tiles
 	
 	this.Tag("stone");

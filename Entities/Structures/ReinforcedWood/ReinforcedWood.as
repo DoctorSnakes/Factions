@@ -1,6 +1,5 @@
-#include "Hitters.as"
-#include "MakeMat.as"
-#include "FireCommon.as"
+#include "Hitters.as";
+#include "FireCommon.as";
 void onInit(CBlob@ this)
 {
     this.getSprite().getConsts().accurateLighting = true;
