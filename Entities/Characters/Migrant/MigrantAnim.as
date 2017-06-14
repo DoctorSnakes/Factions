@@ -2,47 +2,51 @@
 
 #include "ArcherCommon.as"
 #include "FireParticle.as"
-#include "RunnerAnimCommon.as";
-#include "RunnerCommon.as";
-#include "Knocked.as";
+#include "RunnerAnimCommon.as"
+#include "RunnerCommon.as"
+#include "Knocked.as"
+#include "PixelOffsets.as"
+#include "RunnerTextures.as"
 
 const f32 config_offset = -4.0f;
 const string shiny_layer = "shiny bit";
 
 void onInit(CSprite@ this)
 {
+	addRunnerTextures(this, "migrant", "Migrant");
+	
+	LoadSprites(this);
+}
+
+void onPlayerInfoChanged(CSprite@ this)
+{
 	LoadSprites(this);
 }
 
 void LoadSprites(CSprite@ this)
 {
-	const string texname = this.getBlob().getSexNum() == 0 ?
-	                 "Entities/Characters/Archer/ArcherMale.png" :
-	                 "Entities/Characters/Archer/ArcherFemale.png";
-
-	const string texname1 = this.getBlob().getSexNum() == 0 ?
-	                       "Entities/Characters/Migrant/MigrantMale.png" :
-	                       "Entities/Characters/Migrant/MigrantFemale.png";
-	this.ReloadSprite(texname1);
-
+	ensureCorrectRunnerTexture(this, "migrant", "Migrant");
+	
+	string texname = getRunnerTextureName(this);
+	
 	this.RemoveSpriteLayer("hook");
-	CSpriteLayer@ hook = this.addSpriteLayer("hook", texname , 16, 8, this.getBlob().getTeamNum(), this.getBlob().getSkinNum());
+	CSpriteLayer@ hook = this.addTexturedSpriteLayer("hook", texname, 16, 8);
 
 	if (hook !is null)
 	{
 		Animation@ anim = hook.addAnimation("default", 0, false);
-		anim.AddFrame(178);
+		anim.AddFrame(26);
 		hook.SetRelativeZ(2.0f);
 		hook.SetVisible(false);
 	}
 
 	this.RemoveSpriteLayer("rope");
-	CSpriteLayer@ rope = this.addSpriteLayer("rope", texname , 32, 8, this.getBlob().getTeamNum(), this.getBlob().getSkinNum());
+	CSpriteLayer@ rope = this.addTexturedSpriteLayer("rope", texname , 32, 8);
 
 	if (rope !is null)
 	{
 		Animation@ anim = rope.addAnimation("default", 0, false);
-		anim.AddFrame(81);
+		anim.AddFrame(11);
 		rope.SetRelativeZ(-1.5f);
 		rope.SetVisible(false);
 	}
